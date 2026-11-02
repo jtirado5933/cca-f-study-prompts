@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   --t3-blue: #24b1e6;
   --t3-accent-blue: #1680b6;
   --t3-accent-med: #115c8d;
@@ -53,11 +54,11 @@ body::before {
 }
 
 a {
-  color: var(--t3-blue);
+  color: var(--t3-accent-blue);
 }
 
 a:hover {
-  color: #5cc9ef;
+  color: var(--t3-blue);
 }
 
 .wrap {
