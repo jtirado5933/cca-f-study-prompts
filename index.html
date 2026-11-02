@@ -26,6 +26,7 @@
         <h2>Contents</h2>
         <ol>
           <li><a href="#intro">Introduction</a></li>
+          <li><a href="#cert-assessment-skill">Cert assessment skill</a></li>
           <li><a href="#prompt-pack">Prompt pack (8)</a></li>
           <li><a href="#section-01">Domain 1: Agentic Architecture</a></li>
           <li><a href="#section-02">Domain 2: Tool Design &amp; MCP</a></li>
@@ -64,6 +65,17 @@
           <p><strong>How to use the prompts:</strong> attach the official v1.0 exam guide PDF to a Claude chat or Project, then paste a prompt. Every prompt treats the guide as source of truth.</p>
 
           <p class="note"><strong>Integrity:</strong> These prompts produce original practice material from published objectives. They don't reproduce real exam content. You agree to an NDA before the exam starts.</p>
+        </section>
+
+        <section id="cert-assessment-skill">
+          <h2>Cert readiness assessment skill</h2>
+          <p>Read-only Agent Skill for any coding agent that loads <code>SKILL.md</code> files. It scores your repo against all five CCAR-F domains (weighted like the blueprint) and returns a structured report in chat—after you add CLAUDE.md, MCP, Agent SDK code, or similar cert-relevant artifacts.</p>
+          <ol>
+            <li><a class="download-btn" href="assets/skills/claude-cert-assessment/SKILL.md" download="SKILL.md">Download SKILL.md</a></li>
+            <li>Install: create <code>claude-cert-assessment/SKILL.md</code> under your agent's personal skills directory (path depends on the product—e.g. <code>~/.cursor/skills/</code>, <code>~/.claude/skills/</code>, or whatever your docs call the skills folder).</li>
+            <li>In chat, ask to assess or audit the project against CCAR-F readiness (attach the exam guide PDF if you want scope anchored to v1.0).</li>
+          </ol>
+          <p class="note">The assessor never edits your repo. It only inspects and reports.</p>
         </section>
 
         <section id="prompt-pack">

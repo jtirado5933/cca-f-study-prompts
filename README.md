@@ -10,6 +10,7 @@ Not affiliated with or endorsed by Anthropic or Trace3.
 
 - `index.html`: the study post. Each exam domain is a `<section id="section-0N">`, linked from the table of contents.
 - `assets/css/site.css`: Trace3 Full Throttle styling (see `brand.md`).
+- `assets/skills/claude-cert-assessment/SKILL.md`: agent-agnostic CCAR-F readiness assessor skill (linked from the site).
 - `brand.md`: palette, typography, motifs, and GTM copy rules for this page.
 - `.nojekyll`: serves the files as-is, without a Jekyll build.
 
