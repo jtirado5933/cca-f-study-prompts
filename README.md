@@ -25,3 +25,5 @@ python -m http.server 8000
 ```
 
 Then open http://localhost:8000.
+
+If you still see **orange** accents or `[PLACEHOLDER]` text, the browser is serving an old cached copy. Hard-refresh (Ctrl+Shift+R) or open the site in a private window. The stylesheet URL includes `?v=` so a fresh load pulls current Trace3 Full Throttle colors (`#0D1329` background, `#24B1E6` / `#1680B6` blues).
