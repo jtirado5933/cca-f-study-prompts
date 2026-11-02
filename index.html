@@ -3,16 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CCA-F Study Prompts</title>
-  <meta name="description" content="Personal study notes and prompts for the Claude Certified Architect – Foundations (CCAR-F) exam.">
+  <title>CCA-F Prep: Copy/Paste Prompts</title>
+  <meta name="description" content="Prep notes and eight copy/paste prompts for the Claude Certified Architect – Foundations (CCAR-F) exam, plus domain study prompts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header band-motif">
     <div class="wrap">
       <p class="eyebrow">Claude Certified Architect – Foundations (CCAR-F)</p>
-      <h1>CCA-F Study Prompts</h1>
-      <p class="subtitle">[PLACEHOLDER — one-line summary of this post]</p>
+      <h1>CCA-F Prep: Copy/Paste Prompts</h1>
+      <p class="subtitle">Built on Anthropic's v1.0 exam guide (effective July 2026, exam code CCAR-F). Eight copy/paste prompts plus per-domain study notes.</p>
       <p class="disclaimer">Personal study notes. Not affiliated with or endorsed by Anthropic or Trace3.</p>
     </div>
   </header>
@@ -23,11 +26,12 @@
         <h2>Contents</h2>
         <ol>
           <li><a href="#intro">Introduction</a></li>
-          <li><a href="#section-01">Agentic Architecture &amp; Orchestration</a></li>
-          <li><a href="#section-02">Tool Design &amp; MCP Integration</a></li>
-          <li><a href="#section-03">Claude Code Configuration &amp; Workflows</a></li>
-          <li><a href="#section-04">Prompt Engineering &amp; Structured Output</a></li>
-          <li><a href="#section-05">Context Management &amp; Reliability</a></li>
+          <li><a href="#prompt-pack">Prompt pack (8)</a></li>
+          <li><a href="#section-01">Domain 1: Agentic Architecture</a></li>
+          <li><a href="#section-02">Domain 2: Tool Design &amp; MCP</a></li>
+          <li><a href="#section-03">Domain 3: Claude Code Config</a></li>
+          <li><a href="#section-04">Domain 4: Prompt Engineering</a></li>
+          <li><a href="#section-05">Domain 5: Context Management</a></li>
           <li><a href="#resources">Resources</a></li>
         </ol>
       </nav>
@@ -37,66 +41,280 @@
       <article>
         <section id="intro">
           <h2>Introduction</h2>
-          <p class="placeholder">[PLACEHOLDER — intro text]</p>
+          <p>Studying for the Claude Certified Architect – Foundations exam? Anthropic published v1.0 of the exam guide. Below: what you're walking into, how to prep, eight prompts you can paste into Claude (attach the official PDF first), and domain-deep instructor prompts. Those domain sections are an <strong>updated revision</strong> of <a href="https://bogdan-calapod.github.io/posts/claude-architect-course/">hoeem's</a> original &ldquo;Claude Architect&rdquo; study prompts, realigned to the v1.0 CCAR-F guide (July 2026).</p>
+
+          <h3>What you're walking into</h3>
+          <ul>
+            <li><strong>60 questions, 120 minutes</strong>: about 2 minutes per question.</li>
+            <li><strong>Multiple-choice and multiple-response</strong>: each question tells you how many answers to pick. Much prep material still assumes one right answer.</li>
+            <li><strong>4 scenarios</strong>, randomly pulled from a bank of 6. You can't skip any.</li>
+            <li><strong>Pass mark</strong>: scaled 720 out of 1,000. Score report breaks out % correct by domain.</li>
+            <li><strong>Credential</strong>: valid 12 months; renew on time for a free assessment.</li>
+          </ul>
+
+          <h3>Prep takes</h3>
+          <ol>
+            <li><strong>Split time like the blueprint.</strong> Agentic Architecture is 27%, but Claude Code Config and Prompt Engineering are 20% each; MCP plus Context Management make up the rest. Don't spend 80% on agents alone.</li>
+            <li><strong>Judgment, not trivia.</strong> Objectives are tradeoffs: prompt vs. hook, plan mode vs. direct execution, batch vs. real-time, escalate vs. resolve.</li>
+            <li><strong>Build things.</strong> The guide's prep section is hands-on: agent loop, Claude Code on a real repo, MCP tools with structured errors, extraction pipeline.</li>
+            <li><strong>Know what's out of scope.</strong> Fine-tuning, vision, computer use, streaming, cloud provider configs, prompt caching internals: not tested.</li>
+            <li><strong>Write your own practice questions.</strong> You sign an NDA; don't hunt for "real" questions. Use published objectives, like the prompts below.</li>
+          </ol>
+
+          <p><strong>How to use the prompts:</strong> attach the official v1.0 exam guide PDF to a Claude chat or Project, then paste a prompt. Every prompt treats the guide as source of truth.</p>
+
+          <p class="note"><strong>Integrity:</strong> These prompts produce original practice material from published objectives. They don't reproduce real exam content. You agree to an NDA before the exam starts.</p>
         </section>
+
+        <section id="prompt-pack">
+          <h2>Prompt pack</h2>
+          <p>Before you start: attach the official v1.0 exam guide PDF to the chat. Replace anything in [brackets].</p>
+
+          <div class="prompt" id="prompt-1">
+            <div class="prompt-header">
+              <h3>Prompt 1: Build My Study Plan</h3>
+              <button type="button" class="copy-btn" data-copy-target="prompt-1-text">Copy</button>
+            </div>
+            <p>Use first. Turns the blueprint into a plan based on your own gaps.</p>
+            <pre><code id="prompt-1-text">I'm preparing for the Claude Certified Architect – Foundations exam (CCAR-F). Use the attached exam guide as your only source of truth for scope.
+
+1. List the 5 domains with their weights and the task statements under each.
+2. Have me rate myself 1–5 on each task statement, one domain at a time. Wait for my answers before moving on.
+3. Build a [4]-week plan at [5] hours per week. Weight time by domain weight × my gap. Include hands-on work from the guide's Preparation Exercises, not just reading.
+4. End with the 3 task statements I should start on this week and why.</code></pre>
+          </div>
+
+          <div class="prompt" id="prompt-2">
+            <div class="prompt-header">
+              <h3>Prompt 2: Scenario War Room</h3>
+              <button type="button" class="copy-btn" data-copy-target="prompt-2-text">Copy</button>
+            </div>
+            <p>Practices scenario-based judgment the exam is built around.</p>
+            <pre><code id="prompt-2-text">Act as a principal architect reviewing my design. Use [Scenario #] from the attached guide (or pick one at random). Set up the production context in 3–4 sentences, then give me one design decision to make.
+
+After I answer, critique it. Tell me the tradeoff I made, what breaks in production, and which task statement it maps to. Make each round harder than the last. After 5 rounds, summarize my weak spots and what to review.</code></pre>
+          </div>
+
+          <div class="prompt" id="prompt-3">
+            <div class="prompt-header">
+              <h3>Prompt 3: Spot the Anti-Pattern</h3>
+              <button type="button" class="copy-btn" data-copy-target="prompt-3-text">Copy</button>
+            </div>
+            <pre><code id="prompt-3-text">Based on the task statements in the attached guide, write 5 short, realistic snippets. Mix them up: an Agent SDK loop, an MCP tool definition and error response, a CLAUDE.md or .claude/rules file, a CI command, and a JSON schema. Each should contain one subtle mistake an architect should catch.
+
+Show them one at a time. I'll name the flaw and propose a fix. Then give me your answer and the reasoning, and cite the task statement it tests.</code></pre>
+          </div>
+
+          <div class="prompt" id="prompt-4">
+            <div class="prompt-header">
+              <h3>Prompt 4: The Tradeoff Matrix</h3>
+              <button type="button" class="copy-btn" data-copy-target="prompt-4-text">Copy</button>
+            </div>
+            <pre><code id="prompt-4-text">From the attached guide, pull out every "X vs. Y" decision the exam tests. For example: prompt instructions vs. programmatic hooks, plan mode vs. direct execution, Message Batches vs. synchronous calls, tool_choice auto vs. any vs. forced, project vs. user scope, escalate vs. resolve.
+
+Build a table with 4 columns: the decision, when to choose X, when to choose Y, and the clue in a question that should tip you. Then quiz me with 10 one-line situations and I'll make the call.</code></pre>
+          </div>
+
+          <div class="prompt" id="prompt-5">
+            <div class="prompt-header">
+              <h3>Prompt 5: Teach It Back</h3>
+              <button type="button" class="copy-btn" data-copy-target="prompt-5-text">Copy</button>
+            </div>
+            <pre><code id="prompt-5-text">I'll explain Task Statement [#] from the attached guide in my own words, as if I'm teaching a new teammate. Grade me against that task statement's "Knowledge of" and "Skills in" bullets. Tell me what I got right, what I missed, and what I got wrong. Then ask me 2 follow-up questions that dig into the gaps.</code></pre>
+          </div>
+
+          <div class="prompt" id="prompt-6">
+            <div class="prompt-header">
+              <h3>Prompt 6: Lab Coach</h3>
+              <button type="button" class="copy-btn" data-copy-target="prompt-6-text">Copy</button>
+            </div>
+            <pre><code id="prompt-6-text">Turn Preparation Exercise [1–4] from the attached guide into a step-by-step lab I can finish in [2 hours]. For each step, tell me what to build, what "done" looks like, and which exam concept it proves. Don't write the code unless I ask. Give me hints first and let me get stuck a little.</code></pre>
+          </div>
+
+          <div class="prompt" id="prompt-7">
+            <div class="prompt-header">
+              <h3>Prompt 7: Full Mock Exam</h3>
+              <button type="button" class="copy-btn" data-copy-target="prompt-7-text">Copy</button>
+            </div>
+            <pre><code id="prompt-7-text">Write an original practice exam that follows the format in the attached guide. Pick 4 of the 6 scenarios at random and write 15 questions for each, 60 total. Mix multiple-choice and multiple-response items, and have each item say how many answers to select. Spread questions across domains by their published weights. Write new questions. Don't reuse the guide's sample questions.
+
+Give me one question at a time and don't reveal any answers until I finish. At the end, give me a score report like the real one: overall % correct, % correct by domain, and the task statement behind every miss.</code></pre>
+          </div>
+
+          <div class="prompt" id="prompt-8">
+            <div class="prompt-header">
+              <h3>Prompt 8: Rapid-Fire Recall</h3>
+              <button type="button" class="copy-btn" data-copy-target="prompt-8-text">Copy</button>
+            </div>
+            <pre><code id="prompt-8-text">Use only the Appendix of the attached guide (Technologies and Concepts, plus In-Scope Topics). Run a 15-minute rapid-fire drill with one short question at a time. Cover things like stop_reason values, tool_choice options, Message Batches limits, the CLAUDE.md hierarchy, skill frontmatter, and the -p / --output-format json flags. Keep track of my misses and ask them again at the end.</code></pre>
+          </div>
+        </section>
+
+        <p class="attribution">Domain notes and instructor prompts below update hoeem's public &ldquo;Claude Architect&rdquo; course. Start from his originals (linked under <a href="#resources">Resources</a>); this page revises wording, weights, and objectives for Anthropic's v1.0 CCAR-F exam guide.</p>
 
         <section id="section-01">
           <h2><span class="weight">27%</span> Agentic Architecture &amp; Orchestration</h2>
           <h3>Principles</h3>
-          <p class="placeholder">[PLACEHOLDER — principles]</p>
+          <ul>
+            <li>Reject on sight: parsing natural language for loop termination, arbitrary iteration caps as the primary stop, and assistant text as completion indicator; use <code>stop_reason</code>.</li>
+            <li>Subagents do <strong>not</strong> share the coordinator's memory; pass context explicitly.</li>
+            <li>Financial or security-critical flows need programmatic enforcement (hooks, prerequisite gates), not prompt-only guidance.</li>
+          </ul>
           <h3>Patterns</h3>
-          <p class="placeholder">[PLACEHOLDER — patterns]</p>
+          <ul>
+            <li>Hub-and-spoke orchestration; trace failures to the coordinator's decomposition.</li>
+            <li>PostToolUse normalization; tool-call interception for policy blocks.</li>
+            <li>Multi-pass decomposition for large code reviews; <code>fork_session</code> vs resume vs fresh start with summary injection.</li>
+          </ul>
           <div class="prompt">
-            <p class="prompt-label">Prompt</p>
-            <pre><code>[PLACEHOLDER — prompt text]</code></pre>
+            <div class="prompt-header">
+              <p class="prompt-label">Domain instructor prompt</p>
+              <button type="button" class="copy-btn" data-copy-target="domain-1-prompt">Copy</button>
+            </div>
+            <pre><code id="domain-1-prompt">You are an expert instructor teaching Domain 1 (Agentic Architecture &amp; Orchestration) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 27% of the total exam score, making it the single most important domain.
+Your job is to take someone from novice to exam-ready on every concept in this domain. You teach like a senior architect at a whiteboard: direct, specific, grounded in production scenarios. No hedging. No filler. British English spelling throughout.
+
+EXAM CONTEXT
+The exam uses scenario-based multiple choice. One correct answer, three plausible distractors. Passing score: 720/1000. The exam consistently rewards deterministic solutions over probabilistic ones when stakes are high, proportionate fixes, and root cause tracing.
+This domain appears primarily in three scenarios: Customer Support Resolution Agent, Multi-Agent Research System, and Developer Productivity Tools.
+
+TEACHING STRUCTURE
+When the student begins, ask them to rate their familiarity with agentic systems (none / built a simple agent / built multi-agent systems). Then adapt your depth accordingly.
+Work through the 7 task statements in order. For each one: explain with a production example, highlight exam traps, ask 1-2 check questions, connect to the next task statement.
+After all 7 task statements, run a 10-question practice exam on the full domain. Score it, identify gaps, and revisit weak areas.
+End with a build exercise: coordinator + two subagents, structured metadata in context passing, a programmatic prerequisite gate, and a PostToolUse normalisation hook.</code></pre>
           </div>
         </section>
 
         <section id="section-02">
           <h2><span class="weight">18%</span> Tool Design &amp; MCP Integration</h2>
           <h3>Principles</h3>
-          <p class="placeholder">[PLACEHOLDER — principles]</p>
+          <ul>
+            <li>Tool descriptions are the primary mechanism for tool selection: fix vague/overlapping descriptions before classifiers or consolidation.</li>
+            <li>Structured MCP errors: transient vs validation vs business vs permission; don't retry valid empty results.</li>
+            <li>Scope ~4–5 tools per agent; know <code>tool_choice</code>: auto, any, forced.</li>
+          </ul>
           <h3>Patterns</h3>
-          <p class="placeholder">[PLACEHOLDER — patterns]</p>
+          <ul>
+            <li>Project <code>.mcp.json</code> vs user config; <code>${ENV}</code> expansion for secrets.</li>
+            <li>Community MCP servers before custom builds; MCP resources for catalogs.</li>
+            <li>Grep (contents) vs Glob (paths); Edit with Read+Write fallback.</li>
+          </ul>
           <div class="prompt">
-            <p class="prompt-label">Prompt</p>
-            <pre><code>[PLACEHOLDER — prompt text]</code></pre>
+            <div class="prompt-header">
+              <p class="prompt-label">Domain instructor prompt</p>
+              <button type="button" class="copy-btn" data-copy-target="domain-2-prompt">Copy</button>
+            </div>
+            <pre><code id="domain-2-prompt">You are an expert instructor teaching Domain 2 (Tool Design &amp; MCP Integration) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 18% of the total exam score.
+Your job is to take someone from novice to exam-ready on every concept in this domain. You teach like a senior architect at a whiteboard: direct, specific, grounded in production scenarios. No hedging. No filler. British English spelling throughout.
+
+EXAM CONTEXT
+Scenario-based multiple choice. Passing score: 720/1000. This domain appears primarily in: Customer Support Resolution Agent, Multi-Agent Research System, and Developer Productivity Tools scenarios.
+The exam favours low-effort, high-leverage fixes as first steps. Better tool descriptions before routing classifiers. Scoped access before full access. Community servers before custom builds.
+
+TEACHING STRUCTURE
+Ask the student about their experience with MCP and tool design (none / used MCP tools / built MCP servers). Adapt depth accordingly.
+Work through 5 task statements in order. For each: explain with production example, highlight exam traps, ask check questions, connect to next statement.
+After all 5, run a 7-question practice exam. Score and revisit gaps.
+Build exercise: 3 MCP tools with one intentionally ambiguous pair, four error categories, .mcp.json with env expansion, forced tool_choice for the first step.</code></pre>
           </div>
         </section>
 
         <section id="section-03">
           <h2><span class="weight">20%</span> Claude Code Configuration &amp; Workflows</h2>
           <h3>Principles</h3>
-          <p class="placeholder">[PLACEHOLDER — principles]</p>
+          <ul>
+            <li>CLAUDE.md hierarchy: user (~/.claude/) vs project (.claude/ or root) vs directory; team standards belong in project-level, version-controlled files.</li>
+            <li>Path-specific <code>.claude/rules/</code> with glob frontmatter beats directory-only CLAUDE.md for cross-repo conventions.</li>
+            <li>Plan mode for multi-file/architectural work; direct execution for narrow fixes; skills vs always-on CLAUDE.md.</li>
+          </ul>
           <h3>Patterns</h3>
-          <p class="placeholder">[PLACEHOLDER — patterns]</p>
+          <ul>
+            <li>Skill <code>context: fork</code> for noisy analysis; CI needs <code>-p</code> and often <code>--output-format json</code>.</li>
+            <li>Independent review instance beats self-review in the same session.</li>
+            <li>Concrete I/O examples beat vague prose for iterative refinement.</li>
+          </ul>
           <div class="prompt">
-            <p class="prompt-label">Prompt</p>
-            <pre><code>[PLACEHOLDER — prompt text]</code></pre>
+            <div class="prompt-header">
+              <p class="prompt-label">Domain instructor prompt</p>
+              <button type="button" class="copy-btn" data-copy-target="domain-3-prompt">Copy</button>
+            </div>
+            <pre><code id="domain-3-prompt">You are an expert instructor teaching Domain 3 (Claude Code Configuration &amp; Workflows) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 20% of the total exam score.
+Direct, practical teaching. British English spelling throughout.
+
+EXAM CONTEXT
+Scenario-based multiple choice. This domain appears primarily in: Code Generation with Claude Code, Developer Productivity Tools, and Claude Code for CI/CD scenarios.
+This domain is configuration-heavy: you either know where files go and what options do, or you do not.
+
+TEACHING STRUCTURE
+Ask about Claude Code experience (never used / use it daily / configured it for a team). Adapt depth.
+Work through 6 task statements. For each: explain, highlight traps, check questions, connect. After all 6, run an 8-question practice exam.
+Build exercise: CLAUDE.md hierarchy, .claude/rules/ globs, a skill with context: fork, CI script with -p and JSON output.</code></pre>
           </div>
         </section>
 
         <section id="section-04">
           <h2><span class="weight">20%</span> Prompt Engineering &amp; Structured Output</h2>
           <h3>Principles</h3>
-          <p class="placeholder">[PLACEHOLDER — principles]</p>
+          <ul>
+            <li>Explicit categorical criteria beat vague "be conservative" instructions.</li>
+            <li>Few-shot (2–4) with reasoning on ambiguous cases beats more prose.</li>
+            <li><code>tool_use</code> + JSON schema fixes syntax, not semantics: nullable fields and "unclear"/"other" enums reduce fabrication.</li>
+          </ul>
           <h3>Patterns</h3>
-          <p class="placeholder">[PLACEHOLDER — patterns]</p>
+          <ul>
+            <li>Validation-retry works for format/structure errors, not missing source data.</li>
+            <li>Message Batches: cost/latency tradeoff; no multi-turn tool calling in one batch request.</li>
+            <li>Multi-instance review and multi-pass file + integration analysis.</li>
+          </ul>
           <div class="prompt">
-            <p class="prompt-label">Prompt</p>
-            <pre><code>[PLACEHOLDER — prompt text]</code></pre>
+            <div class="prompt-header">
+              <p class="prompt-label">Domain instructor prompt</p>
+              <button type="button" class="copy-btn" data-copy-target="domain-4-prompt">Copy</button>
+            </div>
+            <pre><code id="domain-4-prompt">You are an expert instructor teaching Domain 4 (Prompt Engineering &amp; Structured Output) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 20% of the total exam score.
+Direct, practical teaching. British English spelling throughout.
+
+EXAM CONTEXT
+Scenario-based multiple choice. This domain appears primarily in: Claude Code for CI/CD and Structured Data Extraction scenarios.
+Wrong answers often sound like good engineering; right answers require matching technique to problem.
+
+TEACHING STRUCTURE
+Ask about prompt engineering experience (basic prompting / used few-shot / built extraction pipelines). Adapt depth.
+6 task statements. Explain, trap, check, connect. After all 6, run an 8-question practice exam.
+Build exercise: extraction tool with schema (required, optional, nullable, enums with 'other'), validation-retry, few-shot for varied formats, optional Batches API run with failure handling by custom_id.</code></pre>
           </div>
         </section>
 
         <section id="section-05">
           <h2><span class="weight">15%</span> Context Management &amp; Reliability</h2>
           <h3>Principles</h3>
-          <p class="placeholder">[PLACEHOLDER — principles]</p>
+          <ul>
+            <li>Persistent "case facts" block for transactional data: don't summarise away amounts, dates, IDs.</li>
+            <li>Escalate when the customer asks for a human, policy gaps, or inability to progress, not on sentiment alone.</li>
+            <li>Propagate structured errors with partial results; don't silently succeed on empty or kill the whole workflow on one failure.</li>
+          </ul>
           <h3>Patterns</h3>
-          <p class="placeholder">[PLACEHOLDER — patterns]</p>
+          <ul>
+            <li>Key summaries at the start of long context; trim tool results to needed fields.</li>
+            <li>Scratchpads, /compact, subagent delegation for codebase exploration.</li>
+            <li>Claim–source mappings through synthesis; annotate conflicts instead of picking arbitrarily.</li>
+          </ul>
           <div class="prompt">
-            <p class="prompt-label">Prompt</p>
-            <pre><code>[PLACEHOLDER — prompt text]</code></pre>
+            <div class="prompt-header">
+              <p class="prompt-label">Domain instructor prompt</p>
+              <button type="button" class="copy-btn" data-copy-target="domain-5-prompt">Copy</button>
+            </div>
+            <pre><code id="domain-5-prompt">You are an expert instructor teaching Domain 5 (Context Management &amp; Reliability) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 15% of the total exam score.
+Concepts here cascade into Domains 1, 2, and 4. Direct, practical teaching. British English spelling throughout.
+
+EXAM CONTEXT
+Scenario-based multiple choice. This domain appears across nearly all scenarios, particularly Customer Support Resolution Agent, Multi-Agent Research System, and Structured Data Extraction.
+
+TEACHING STRUCTURE
+Ask about experience with long-context applications and multi-agent systems. Adapt depth.
+6 task statements. After all 6, run a 6-question practice exam.
+Build exercise: coordinator with two subagents, persistent case facts block, simulated timeout with structured error propagation, conflicting sources with preserved attribution.</code></pre>
           </div>
         </section>
 
@@ -105,17 +323,35 @@
           <ul>
             <li><a href="https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification">CCA-F exam registration (Anthropic Partner Academy)</a></li>
             <li><a href="https://docs.claude.com/">Claude documentation</a></li>
-            <li><a href="https://bogdan-calapod.github.io/posts/claude-architect-course/">Claude Architect course (mirror of hoeem's article)</a></li>
+            <li><a href="https://bogdan-calapod.github.io/posts/claude-architect-course/">Claude Architect course (hoeem's original prompts; web-friendly mirror)</a>: full task-by-task breakdown</li>
+            <li><a href="https://docs.claude.com/en/docs/build-with-claude/overview">Building with the Claude API</a></li>
+            <li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a></li>
           </ul>
         </section>
       </article>
     </main>
   </div>
 
-  <footer class="site-footer">
+  <footer class="site-footer band-motif">
     <div class="wrap">
+      <p class="footer-tagline">All Possibilities Live In Technology</p>
       <p>&copy; 2026 Jaime Tirado. Content licensed under MIT unless noted.</p>
     </div>
   </footer>
+  <script>
+    document.querySelectorAll(".copy-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-copy-target");
+        var el = document.getElementById(id);
+        if (!el) return;
+        var text = el.value !== undefined ? el.value : el.textContent;
+        navigator.clipboard.writeText(text).then(function () {
+          var label = btn.textContent;
+          btn.textContent = "Copied";
+          setTimeout(function () { btn.textContent = label; }, 1500);
+        });
+      });
+    });
+  </script>
 </body>
 </html>

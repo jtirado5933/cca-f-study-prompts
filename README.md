@@ -9,10 +9,11 @@ Not affiliated with or endorsed by Anthropic or Trace3.
 ## Structure
 
 - `index.html`: the study post. Each exam domain is a `<section id="section-0N">`, linked from the table of contents.
-- `assets/css/site.css`: all styling.
+- `assets/css/site.css`: Trace3 Full Throttle styling (see `brand.md`).
+- `brand.md`: palette, typography, motifs, and GTM copy rules for this page.
 - `.nojekyll`: serves the files as-is, without a Jekyll build.
 
-Text marked `[PLACEHOLDER — ...]` is waiting for content. Replace it in `index.html`, then commit and push to `main`; Pages redeploys automatically.
+Content lives in `index.html`: intro, eight copy/paste prompts, and per-domain study notes with abbreviated instructor prompts (full task-by-task course text: see Resources link). Commit and push to `main`; Pages redeploys automatically.
 
 The local working folder is `cc_cca_f_prompts_page`; the GitHub repo is `cca-f-study-prompts`.
 
