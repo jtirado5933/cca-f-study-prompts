@@ -6,18 +6,18 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>CCA-F Prep: Copy/Paste Prompts</title>
+  <title>CCAR-F Prep: Copy/Paste Prompts</title>
   <meta name="description" content="Prep notes and eight copy/paste prompts for the Claude Certified Architect – Foundations (CCAR-F) exam, plus domain study prompts.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css?v=20261102">
+  <link rel="stylesheet" href="assets/css/site.css?v=20261109">
 </head>
-<body>
+<body class="workshop-locked">
   <header class="site-header band-motif">
     <div class="wrap">
       <p class="eyebrow">Claude Certified Architect – Foundations (CCAR-F)</p>
-      <h1>CCA-F Prep: Copy/Paste Prompts</h1>
+      <h1>CCAR-F Prep: Copy/Paste Prompts</h1>
       <p class="subtitle">Built on Anthropic's v1.0 exam guide (effective July 2026, exam code CCAR-F). Eight copy/paste prompts, per-domain study notes, and a hands-on workshop.</p>
       <p class="disclaimer">Personal study notes. Not affiliated with or endorsed by Anthropic or Trace3.</p>
     </div>
@@ -73,6 +73,19 @@
         </section>
 
         <section id="workshop">
+          <div class="workshop-gate" id="workshop-gate" role="region" aria-labelledby="workshop-gate-heading">
+            <h2 id="workshop-gate-heading">Workshop materials</h2>
+            <p>Day 1 (hands-on) and Day 2 (office hours), including the starter download and build checklists, are for people who registered for the session. Enter the access code from your registration email.</p>
+            <form class="workshop-gate-form" id="workshop-code-form">
+              <label class="workshop-gate-label" for="workshop-code-input">Access code</label>
+              <div class="workshop-gate-row">
+                <input class="workshop-gate-input" id="workshop-code-input" name="code" type="text" autocomplete="off" spellcheck="false" inputmode="text" required>
+                <button class="download-btn workshop-gate-submit" type="submit">Unlock</button>
+              </div>
+              <p class="workshop-gate-error" id="workshop-gate-error" hidden role="alert">That code did not match. Double-check the message from registration.</p>
+            </form>
+          </div>
+          <div class="workshop-content">
           <h2>Workshop: Day 1 (hands-on)</h2>
           <p>Four hours, in person and on Teams. You build a Claude Code customer service agent for Malmberg's Marinated Meats (a fictional company), one exam domain at a time. It mirrors the exam's <strong>Customer Support Resolution Agent</strong> scenario. Remote? Follow along on this page and post <em>"Build N done"</em> or your blocker in the Teams chat.</p>
 
@@ -98,26 +111,27 @@
             <li><strong>3:40</strong> Score yourself with the assessment skill, debrief, Day 2 brief</li>
           </ul>
           <p>Domains run in build order, not weight order. Study time should still follow the weights.</p>
+          <p><strong>Where to run the "Check my work" prompts:</strong> paste them into Claude Code started in the starter folder, with the v1.0 exam guide PDF saved in that folder as <code>exam-guide.pdf</code>. Add "Use @exam-guide.pdf as the source of truth." so Claude grades against the guide.</p>
 
           <h3>Build 1: Claude Code configuration</h3>
           <ol>
             <li>Fill the <strong>Commands</strong> section of <code>CLAUDE.md</code> with exact invocations.</li>
-            <li>Fill <code>.claude/rules/mcp-tools.md</code>: a <code>paths</code> glob that matches only the MCP server code, plus your tool-writing conventions.</li>
-            <li>Turn <code>.claude/skills/example-skill/</code> into an <code>order-lookup</code> skill. The description says what it does, when to use it, and when not to. Set <code>allowed-tools</code>.</li>
-            <li>Try it: ask Claude to edit <code>data/orders.json</code>. The <code>deny</code> rule blocks it. Run <code>/memory</code> to see which memory files are loaded.</li>
+            <li>Fill <code>.claude/rules/mcp-tools.md</code>: a <code>paths</code> glob (a file pattern such as <code>mcp_server/**/*.py</code>; the rule loads only when Claude touches a matching file) that matches only the MCP server code, plus your tool-writing conventions.</li>
+            <li>Turn <code>.claude/skills/example-skill/</code> into an <code>order-lookup</code> skill. The description says what it does, when to use it, and when not to. Set <code>allowed-tools</code> (the tools the skill may use without asking while it runs).</li>
+            <li>Try it: ask Claude to edit <code>data/orders.json</code>. The <code>deny</code> permission rule in <code>.claude/settings.json</code> blocks it. Run <code>/permissions</code> to see every permission rule and the settings file it comes from, and <code>/memory</code> to see which memory files are loaded.</li>
           </ol>
           <div class="prompt" id="check-1">
             <div class="prompt-header">
               <h3>Check my work: Build 1</h3>
               <button type="button" class="copy-btn" data-copy-target="check-1-text">Copy</button>
             </div>
-            <pre><code id="check-1-text">Act as a CCA-F examiner. Review CLAUDE.md, .claude/settings.json, .claude/rules/mcp-tools.md, and my skill in .claude/skills/. Is CLAUDE.md short, imperative, and does it list exact commands? Does the rule's paths glob match only the files it should? Does the skill description say what, when, and when not? Should anything in CLAUDE.md move to a rule or a skill? List the gaps and the task statement each maps to (3.1-3.3). Don't fix anything.</code></pre>
+            <pre><code id="check-1-text">Act as a CCAR-F examiner. Review CLAUDE.md, .claude/settings.json, .claude/rules/mcp-tools.md, and my skill in .claude/skills/. Is CLAUDE.md short, imperative, and does it list exact commands? Does the rule's paths glob match only the files it should? Does the skill description say what, when, and when not? Should anything in CLAUDE.md move to a rule or a skill? List the gaps and the task statement each maps to (3.1-3.3). Don't fix anything.</code></pre>
           </div>
 
           <h3>Build 2: Tool design &amp; MCP</h3>
           <ol>
             <li>Ask Claude: "Where is order MM-1002?" and "What email is on Dana Whitfield's account?" Watch which tool it picks.</li>
-            <li>In <code>mcp_server/server.py</code>, rewrite the <code>get_customer</code> and <code>lookup_order</code> descriptions: inputs, example requests, edge cases, and when to use the other tool.</li>
+            <li>In <code>mcp_server/server.py</code>, rewrite the <code>get_customer</code> and <code>lookup_order</code> descriptions: inputs, example requests, edge cases, and when to use the other tool. <code>lookup_order</code> already trims its result to the fields the agent needs (internal fields such as <code>internal_margin_pct</code> and <code>picker_id</code> never leave the tool), so describe only what it returns.</li>
             <li>Ask about order MM-1009. It fails with a generic "Operation failed". Make it a structured error with <code>errorCategory</code> and <code>isRetryable</code>; <code>process_refund</code> shows the pattern.</li>
             <li>Ask Claude to read the <code>malmberg://policies/refunds</code> resource. Restart Claude Code after editing the server.</li>
           </ol>
@@ -126,28 +140,28 @@
               <h3>Check my work: Build 2</h3>
               <button type="button" class="copy-btn" data-copy-target="check-2-text">Copy</button>
             </div>
-            <pre><code id="check-2-text">Act as a CCA-F examiner. Read mcp_server/server.py and .mcp.json. From the descriptions alone, could a model reliably choose between get_customer and lookup_order? Is the MM-1009 failure a structured error a model could act on (category, retryable, message)? Is "no order found" still a valid empty result rather than an error? Is the server scoped at project level, with no secrets in the file? List the gaps and the task statement each maps to (2.1, 2.2, 2.4). Don't fix anything.</code></pre>
+            <pre><code id="check-2-text">Act as a CCAR-F examiner. Read mcp_server/server.py and .mcp.json. From the descriptions alone, could a model reliably choose between get_customer and lookup_order? Is the MM-1009 failure a structured error a model could act on (category, retryable, message)? Is "no order found" still a valid empty result rather than an error? Is the server scoped at project level, with no secrets in the file? List the gaps and the task statement each maps to (2.1, 2.2, 2.4). Don't fix anything.</code></pre>
           </div>
 
           <h3>Build 3: Agentic architecture</h3>
           <ol>
             <li>Turn <code>Subagent.md</code> into <code>escalation-investigator.md</code>: when to delegate to it, the fewest tools it needs, a model, and a handoff summary as the return.</li>
-            <li>Fill <code>Hook1.md</code> (block refunds over $500, point Claude to <code>escalate_to_human</code>) and <code>Hook2.md</code> (block a refund unless the order belongs to the customer). Then ask Claude to implement both as PreToolUse hook scripts and wire them into <code>.claude/settings.json</code>. Read what it wrote.</li>
-            <li>Turn <code>Slash.md</code> into <code>process-refund.md</code>. Decide <code>disable-model-invocation</code> and <code>allowed-tools</code>.</li>
-            <li>Prove it: "Refund $650 on MM-1003 for customer C-002" is blocked by your hook. "Refund $20 on MM-1001 for dana.w@example.com" triggers the <code>ask</code> prompt.</li>
+            <li>Fill <code>refund-limit.md</code> (block refunds over $500, point Claude to <code>escalate_to_human</code>) and <code>order-ownership.md</code> (block a refund unless the order belongs to the customer). Then ask Claude to implement both as PreToolUse hook scripts (PreToolUse runs your script before the tool call; exit code 0 lets the call through, exit code 2 blocks it and sends the script's stderr back to Claude) and wire them into <code>.claude/settings.json</code>. Each block message starts with <code>BLOCKED by refund-limit hook:</code> or <code>BLOCKED by order-ownership hook:</code>. Read what it wrote.</li>
+            <li>Turn <code>Slash.md</code> into <code>process-refund.md</code>. Decide <code>disable-model-invocation</code> (when true, only you can run the command by typing it; Claude can't invoke it on its own) and <code>allowed-tools</code>.</li>
+            <li>Prove it: "Refund $650 on MM-1003 for customer C-002" must show <code>BLOCKED by refund-limit hook:</code>, and "Refund $20 on MM-1001 for customer C-002" must show <code>BLOCKED by order-ownership hook:</code>, before any approval prompt. <code>server.py</code> also rejects both, so a server error alone proves nothing: it is the second line of defence, not proof your hook works. Then "Refund $20 on MM-1001 for dana.w@example.com" passes both hooks and triggers the <code>ask</code> permission prompt.</li>
           </ol>
           <div class="prompt" id="check-3">
             <div class="prompt-header">
               <h3>Check my work: Build 3</h3>
               <button type="button" class="copy-btn" data-copy-target="check-3-text">Copy</button>
             </div>
-            <pre><code id="check-3-text">Act as a CCA-F examiner. Review .claude/agents/, .claude/commands/, .claude/hooks/, and .claude/settings.json. Which business rules are enforced deterministically (hook or permission) and which rely only on the prompt? Can anything with a real side effect be invoked by the model on its own? Does the subagent have only the tools it needs, and does it return a handoff a human could act on without the conversation? List the gaps and the task statement each maps to (1.3-1.5, 3.2). Don't fix anything.</code></pre>
+            <pre><code id="check-3-text">Act as a CCAR-F examiner. Review .claude/agents/, .claude/commands/, .claude/hooks/, and .claude/settings.json. Which business rules are enforced deterministically (hook or permission) and which rely only on the prompt? Can anything with a real side effect be invoked by the model on its own? Does the subagent have only the tools it needs, and does it return a handoff a human could act on without the conversation? List the gaps and the task statement each maps to (1.3-1.5, 3.2). Don't fix anything.</code></pre>
           </div>
 
           <h3>Build 4: Prompting &amp; structured output</h3>
           <ol>
             <li>Run <code>python scripts/triage.py data/tickets/ticket-03.txt</code>. The schema forces values the ticket doesn't have.</li>
-            <li>Fix the three flaws in <code>schemas/ticket_triage.schema.json</code>: what happens when there's no order number, a category you didn't plan for, or a ticket you can't classify?</li>
+            <li>Fix the four flaws in <code>schemas/ticket_triage.schema.json</code>: what happens when there's no order number, no refund amount, a category you didn't plan for, or a ticket you can't classify?</li>
             <li>Fill <code>schemas/triage_prompt.md</code>: explicit criteria instead of "be accurate", plus 2-3 examples for the ambiguous tickets.</li>
             <li>Run all four tickets. ticket-03 should return a null <code>order_id</code>; only ticket-01 should set <code>customer_requested_human</code>.</li>
           </ol>
@@ -156,29 +170,30 @@
               <h3>Check my work: Build 4</h3>
               <button type="button" class="copy-btn" data-copy-target="check-4-text">Copy</button>
             </div>
-            <pre><code id="check-4-text">Act as a CCA-F examiner. Review schemas/ticket_triage.schema.json, schemas/triage_prompt.md, and scripts/triage.py. Will the schema push the model to invent values a ticket doesn't contain? Is there a way out for unplanned categories and for tickets that can't be classified? Are my criteria specific and checkable? Do my examples cover the ambiguous cases? What does the schema guarantee, and what can still be wrong? List the gaps and the task statement each maps to (3.6, 4.1-4.3). Don't fix anything.</code></pre>
+            <pre><code id="check-4-text">Act as a CCAR-F examiner. Review schemas/ticket_triage.schema.json, schemas/triage_prompt.md, and scripts/triage.py. Will the schema push the model to invent values a ticket doesn't contain? Is there a way out for unplanned categories and for tickets that can't be classified? Are my criteria specific and checkable? Do my examples cover the ambiguous cases? What does the schema guarantee, and what can still be wrong? List the gaps and the task statement each maps to (3.6, 4.1-4.3). Don't fix anything.</code></pre>
           </div>
 
           <h3>Build 5: Context &amp; reliability</h3>
           <ol>
             <li>Fill <strong>Escalation criteria</strong> in <code>CLAUDE.md</code>, with 2-3 short examples of escalating versus resolving.</li>
             <li>Fill <strong>Case facts</strong>: a block of customer ID, order IDs, amounts, dates, and what the customer expects, repeated at the top of every handoff.</li>
-            <li>In your <code>order-lookup</code> skill, keep only the order fields that matter. Never surface <code>internal_margin_pct</code> or <code>picker_id</code>.</li>
-            <li>Test with the tickets. ticket-01 escalates right away. ticket-04 asks which Sam Ortega. ticket-03 escalates because the policy doesn't cover price matching. Run <code>/compact</code>, then ask for the case facts: the amounts are still there.</li>
+            <li>Trimming verbose tool output happens in the tool: <code>lookup_order</code> in <code>mcp_server/server.py</code> returns only the fields the agent needs (task 5.1). Your <code>order-lookup</code> skill just uses those returned fields and never guesses at others.</li>
+            <li>Test with the tickets: start <code>claude</code> in the starter folder, paste one ticket's text from <code>data/tickets/</code>, and watch whether it calls <code>escalate_to_human</code> or asks a clarifying question. Run <code>/clear</code> before the next ticket. ticket-01 escalates right away. ticket-04 asks which Sam Ortega. ticket-03 escalates because the policy doesn't cover price matching. Run <code>/compact</code>, then ask for the case facts: the amounts are still there.</li>
           </ol>
           <div class="prompt" id="check-5">
             <div class="prompt-header">
               <h3>Check my work: Build 5</h3>
               <button type="button" class="copy-btn" data-copy-target="check-5-text">Copy</button>
             </div>
-            <pre><code id="check-5-text">Act as a CCA-F examiner. Review the Escalation criteria and Case facts sections of CLAUDE.md, my order-lookup skill, and the Returns section of my subagent. Would the agent escalate at once when a customer asks for a human? Ask for another identifier when two customers match? Escalate when the policy is silent? Would amounts, dates, and order IDs survive summarization and /compact? Are verbose tool results trimmed? List the gaps and the task statement each maps to (5.1, 5.2). Don't fix anything.</code></pre>
+            <pre><code id="check-5-text">Act as a CCAR-F examiner. Review the Escalation criteria and Case facts sections of CLAUDE.md, my order-lookup skill, the Returns section of my subagent, and lookup_order in mcp_server/server.py. Would the agent escalate at once when a customer asks for a human? Ask for another identifier when two customers match? Escalate when the policy is silent? Would amounts, dates, and order IDs survive summarization and /compact? Does lookup_order trim its result to the fields the agent needs, and does my skill rely only on those fields? List the gaps and the task statement each maps to (5.1, 5.2). Don't fix anything.</code></pre>
           </div>
 
           <h3>Wrap-up: score yourself</h3>
           <p>Install the <a href="#cert-assessment-skill">cert readiness assessment skill</a> and run it on your starter folder. Expect a low Agent SDK score: today's build is Claude Code configuration, not SDK code. That gap is a good Day 2 goal.</p>
+          </div>
         </section>
 
-        <section id="day-2">
+        <section id="day-2" class="workshop-content">
           <h2>Workshop: Day 2 (office hours)</h2>
           <p>Two hours to build your own agent, with feedback. Bring a use case. The goal is to apply Day 1's patterns to your own problem.</p>
           <h3>Starter ideas</h3>
@@ -202,8 +217,8 @@
           <p>Read-only Agent Skill for any coding agent that loads <code>SKILL.md</code> files. It scores your repo against all five CCAR-F domains (weighted like the blueprint) and returns a structured report in chat—after you add CLAUDE.md, MCP, Agent SDK code, or similar cert-relevant artifacts.</p>
           <ol>
             <li><a class="download-btn" href="assets/skills/claude-cert-assessment/SKILL.md" download="SKILL.md">Download SKILL.md</a></li>
-            <li>Install: create <code>claude-cert-assessment/SKILL.md</code> under your agent's personal skills directory (path depends on the product—e.g. <code>~/.cursor/skills/</code>, <code>~/.claude/skills/</code>, or whatever your docs call the skills folder).</li>
-            <li>In chat, ask to assess or audit the project against CCAR-F readiness (attach the exam guide PDF if you want scope anchored to v1.0).</li>
+            <li>Install: save it as <code>~/.claude/skills/claude-cert-assessment/SKILL.md</code> (Windows: <code>%USERPROFILE%\.claude\skills\claude-cert-assessment\SKILL.md</code>). Other agents: the same <code>claude-cert-assessment/SKILL.md</code> under their personal skills folder.</li>
+            <li>Start <code>claude</code> in the project folder and type: <code>Assess this project against CCAR-F readiness.</code> (Add <code>@exam-guide.pdf</code> if the guide is in the folder and you want scope anchored to v1.0.)</li>
           </ol>
           <p class="note">The assessor never edits your repo. It only inspects and reports.</p>
         </section>
@@ -293,6 +308,7 @@ Give me one question at a time and don't reveal any answers until I finish. At t
         </section>
 
         <p class="attribution">Domain notes and instructor prompts below update hoeem's public &ldquo;Claude Architect&rdquo; course. Start from his originals (linked under <a href="#resources">Resources</a>); this page revises wording, weights, and objectives for Anthropic's v1.0 CCAR-F exam guide.</p>
+        <p><strong>Where to run the domain instructor prompts:</strong> paste them into Claude Code started in the starter folder, with the v1.0 exam guide PDF saved there as <code>exam-guide.pdf</code>; each prompt references it as <code>@exam-guide.pdf</code>.</p>
 
         <section id="section-01">
           <h2><span class="weight">27%</span> Agentic Architecture &amp; Orchestration</h2>
@@ -313,11 +329,12 @@ Give me one question at a time and don't reveal any answers until I finish. At t
               <p class="prompt-label">Domain instructor prompt</p>
               <button type="button" class="copy-btn" data-copy-target="domain-1-prompt">Copy</button>
             </div>
-            <pre><code id="domain-1-prompt">You are an expert instructor teaching Domain 1 (Agentic Architecture &amp; Orchestration) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 27% of the total exam score, making it the single most important domain.
+            <pre><code id="domain-1-prompt">Use the attached v1.0 exam guide (@exam-guide.pdf) as the source of truth.
+You are an expert instructor teaching Domain 1 (Agentic Architecture &amp; Orchestration) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 27% of the total exam score, making it the single most important domain.
 Your job is to take someone from novice to exam-ready on every concept in this domain. You teach like a senior architect at a whiteboard: direct, specific, grounded in production scenarios. No hedging. No filler. British English spelling throughout.
 
 EXAM CONTEXT
-The exam uses scenario-based multiple choice. One correct answer, three plausible distractors. Passing score: 720/1000. The exam consistently rewards deterministic solutions over probabilistic ones when stakes are high, proportionate fixes, and root cause tracing.
+The exam uses scenario-based multiple-choice and multiple-response questions; each item states how many answers to pick. Wrong options are plausible distractors. Passing score: 720/1000. The exam consistently rewards deterministic solutions over probabilistic ones when stakes are high, proportionate fixes, and root cause tracing.
 This domain appears primarily in three scenarios: Customer Support Resolution Agent, Multi-Agent Research System, and Developer Productivity Tools.
 
 TEACHING STRUCTURE
@@ -347,11 +364,12 @@ End with a build exercise: coordinator + two subagents, structured metadata in c
               <p class="prompt-label">Domain instructor prompt</p>
               <button type="button" class="copy-btn" data-copy-target="domain-2-prompt">Copy</button>
             </div>
-            <pre><code id="domain-2-prompt">You are an expert instructor teaching Domain 2 (Tool Design &amp; MCP Integration) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 18% of the total exam score.
+            <pre><code id="domain-2-prompt">Use the attached v1.0 exam guide (@exam-guide.pdf) as the source of truth.
+You are an expert instructor teaching Domain 2 (Tool Design &amp; MCP Integration) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 18% of the total exam score.
 Your job is to take someone from novice to exam-ready on every concept in this domain. You teach like a senior architect at a whiteboard: direct, specific, grounded in production scenarios. No hedging. No filler. British English spelling throughout.
 
 EXAM CONTEXT
-Scenario-based multiple choice. Passing score: 720/1000. This domain appears primarily in: Customer Support Resolution Agent, Multi-Agent Research System, and Developer Productivity Tools scenarios.
+Scenario-based multiple-choice and multiple-response; each item states how many answers to pick. Passing score: 720/1000. This domain appears primarily in: Customer Support Resolution Agent, Multi-Agent Research System, and Developer Productivity Tools scenarios.
 The exam favours low-effort, high-leverage fixes as first steps. Better tool descriptions before routing classifiers. Scoped access before full access. Community servers before custom builds.
 
 TEACHING STRUCTURE
@@ -369,6 +387,7 @@ Build exercise: 3 MCP tools with one intentionally ambiguous pair, four error ca
             <li>CLAUDE.md hierarchy: user (~/.claude/) vs project (.claude/ or root) vs directory; team standards belong in project-level, version-controlled files.</li>
             <li>Path-specific <code>.claude/rules/</code> with glob frontmatter beats directory-only CLAUDE.md for cross-repo conventions.</li>
             <li>Plan mode for multi-file/architectural work; direct execution for narrow fixes; skills vs always-on CLAUDE.md.</li>
+            <li>Permission rules: <code>allow</code> uses a tool without asking; <code>ask</code> prompts for confirmation and beats <code>allow</code>; <code>deny</code> blocks and beats both. <code>/permissions</code> lists every rule and the settings file it comes from: user (<code>~/.claude/settings.json</code>), shared project (<code>.claude/settings.json</code>), local project (<code>.claude/settings.local.json</code>), and enterprise managed policy, which overrides the others. Choosing "always allow" usually writes a rule to <code>.claude/settings.local.json</code>. Not the same as <code>.claude/rules/</code> memory files.</li>
           </ul>
           <h3>Patterns</h3>
           <ul>
@@ -381,11 +400,12 @@ Build exercise: 3 MCP tools with one intentionally ambiguous pair, four error ca
               <p class="prompt-label">Domain instructor prompt</p>
               <button type="button" class="copy-btn" data-copy-target="domain-3-prompt">Copy</button>
             </div>
-            <pre><code id="domain-3-prompt">You are an expert instructor teaching Domain 3 (Claude Code Configuration &amp; Workflows) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 20% of the total exam score.
+            <pre><code id="domain-3-prompt">Use the attached v1.0 exam guide (@exam-guide.pdf) as the source of truth.
+You are an expert instructor teaching Domain 3 (Claude Code Configuration &amp; Workflows) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 20% of the total exam score.
 Direct, practical teaching. British English spelling throughout.
 
 EXAM CONTEXT
-Scenario-based multiple choice. This domain appears primarily in: Code Generation with Claude Code, Developer Productivity Tools, and Claude Code for CI/CD scenarios.
+Scenario-based multiple-choice and multiple-response; each item states how many answers to pick. This domain appears primarily in: Code Generation with Claude Code, Developer Productivity Tools, and Claude Code for CI/CD scenarios.
 This domain is configuration-heavy: you either know where files go and what options do, or you do not.
 
 TEACHING STRUCTURE
@@ -414,11 +434,12 @@ Build exercise: CLAUDE.md hierarchy, .claude/rules/ globs, a skill with context:
               <p class="prompt-label">Domain instructor prompt</p>
               <button type="button" class="copy-btn" data-copy-target="domain-4-prompt">Copy</button>
             </div>
-            <pre><code id="domain-4-prompt">You are an expert instructor teaching Domain 4 (Prompt Engineering &amp; Structured Output) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 20% of the total exam score.
+            <pre><code id="domain-4-prompt">Use the attached v1.0 exam guide (@exam-guide.pdf) as the source of truth.
+You are an expert instructor teaching Domain 4 (Prompt Engineering &amp; Structured Output) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 20% of the total exam score.
 Direct, practical teaching. British English spelling throughout.
 
 EXAM CONTEXT
-Scenario-based multiple choice. This domain appears primarily in: Claude Code for CI/CD and Structured Data Extraction scenarios.
+Scenario-based multiple-choice and multiple-response; each item states how many answers to pick. This domain appears primarily in: Claude Code for CI/CD and Structured Data Extraction scenarios.
 Wrong answers often sound like good engineering; right answers require matching technique to problem.
 
 TEACHING STRUCTURE
@@ -447,11 +468,12 @@ Build exercise: extraction tool with schema (required, optional, nullable, enums
               <p class="prompt-label">Domain instructor prompt</p>
               <button type="button" class="copy-btn" data-copy-target="domain-5-prompt">Copy</button>
             </div>
-            <pre><code id="domain-5-prompt">You are an expert instructor teaching Domain 5 (Context Management &amp; Reliability) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 15% of the total exam score.
+            <pre><code id="domain-5-prompt">Use the attached v1.0 exam guide (@exam-guide.pdf) as the source of truth.
+You are an expert instructor teaching Domain 5 (Context Management &amp; Reliability) of the Claude Certified Architect (Foundations) certification exam. This domain is worth 15% of the total exam score.
 Concepts here cascade into Domains 1, 2, and 4. Direct, practical teaching. British English spelling throughout.
 
 EXAM CONTEXT
-Scenario-based multiple choice. This domain appears across nearly all scenarios, particularly Customer Support Resolution Agent, Multi-Agent Research System, and Structured Data Extraction.
+Scenario-based multiple-choice and multiple-response; each item states how many answers to pick. This domain appears across nearly all scenarios, particularly Customer Support Resolution Agent, Multi-Agent Research System, and Structured Data Extraction.
 
 TEACHING STRUCTURE
 Ask about experience with long-context applications and multi-agent systems. Adapt depth.
@@ -463,7 +485,7 @@ Build exercise: coordinator with two subagents, persistent case facts block, sim
         <section id="resources">
           <h2>Resources</h2>
           <ul>
-            <li><a href="https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification">CCA-F exam registration (Anthropic Partner Academy)</a></li>
+            <li><a href="https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification">CCAR-F exam registration (Anthropic Partner Academy)</a></li>
             <li><a href="https://docs.claude.com/">Claude documentation</a></li>
             <li><a href="https://bogdan-calapod.github.io/posts/claude-architect-course/">Claude Architect course (hoeem's original prompts)</a></li>
             <li><a href="https://docs.claude.com/en/docs/build-with-claude/overview">Building with the Claude API</a></li>
@@ -480,6 +502,7 @@ Build exercise: coordinator with two subagents, persistent case facts block, sim
       <p>&copy; 2026 Jaime Tirado. Content licensed under MIT unless noted.</p>
     </div>
   </footer>
+  <script src="assets/js/workshop-gate.js?v=20261109b"></script>
   <script>
     document.querySelectorAll(".copy-btn").forEach(function (btn) {
       btn.addEventListener("click", function () {

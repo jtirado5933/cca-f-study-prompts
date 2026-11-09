@@ -381,6 +381,70 @@ code {
   text-transform: uppercase;
 }
 
+.workshop-gate {
+  margin: 0 0 1.5rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-raised);
+}
+
+body:not(.workshop-locked) .workshop-gate {
+  display: none;
+}
+
+body.workshop-locked .workshop-content {
+  display: none;
+}
+
+.workshop-gate-form {
+  margin: 1rem 0 0;
+}
+
+.workshop-gate-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.workshop-gate-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.workshop-gate-input {
+  flex: 1 1 12rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: rgba(13, 19, 41, 0.65);
+  color: var(--text);
+  font: 400 1rem var(--font);
+}
+
+.workshop-gate-input:focus-visible {
+  outline: 2px solid var(--t3-blue);
+  outline-offset: 2px;
+}
+
+.workshop-gate-submit {
+  margin: 0;
+}
+
+.workshop-gate-error {
+  margin: 0.65rem 0 0;
+  color: #f5a8a8;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 860px) {
   .layout {
     grid-template-columns: 1fr;
