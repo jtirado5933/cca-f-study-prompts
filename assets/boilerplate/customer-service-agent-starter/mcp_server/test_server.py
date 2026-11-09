@@ -16,6 +16,8 @@ def error_of(fn, *args, **kwargs) -> dict:
 assert get_customer(name="Sam Ortega")["count"] == 2           # two matches: ask for another identifier
 assert get_customer(email="nobody@example.com")["count"] == 0  # valid empty result, not an error
 assert lookup_order("mm-1002")["order"]["status"] == "Shipped"
+INTERNAL = {"internal_margin_pct", "picker_id", "warehouse", "fulfillment_batch", "last_updated_by"}
+assert not INTERNAL & lookup_order("MM-1001")["order"].keys()  # trimmed in the tool, never reaches the agent
 assert lookup_order("MM-9999")["found"] is False
 assert process_refund("MM-1001", "C-001", 20.0, "warm on arrival")["simulated"] is True
 assert error_of(process_refund, "MM-1003", "C-002", 712.0, "warm")["next_step"] == "escalate_to_human"

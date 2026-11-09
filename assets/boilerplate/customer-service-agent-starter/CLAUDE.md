@@ -12,7 +12,8 @@ edits files in `data/`.
 
 ## Tools (MCP server `malmberg`)
 - `get_customer`: find a customer by email, customer ID, or name
-- `lookup_order`: order status, items, and delivery details
+- `lookup_order`: order status, items, and delivery details (trimmed in the tool to the fields
+  the agent needs; internal warehouse, margin, and picker data are never returned)
 - `process_refund`: issue a refund (simulated, nothing is written)
 - `escalate_to_human`: hand the case to a human agent
 - Resource `malmberg://policies/refunds`: the refund policy
@@ -33,7 +34,9 @@ edits files in `data/`.
 - Skills: `.claude/skills/`
 - Subagents: `.claude/agents/`
 - Commands: `.claude/commands/`
-- Path-scoped rules: `.claude/rules/`
+- Path-scoped memory rules: `.claude/rules/`
+- Permission rules (allow / ask / deny): `.claude/settings.json`. `deny` beats `ask` and `allow`;
+  `ask` beats `allow`. `/permissions` lists every rule and its source file.
 - Hook specs: `.claude/hooks/` (wired up in `.claude/settings.json`, documented in `.claude/settings.md`)
 - MCP servers: `.mcp.json`
 - Ticket triage schema and prompt: `schemas/`

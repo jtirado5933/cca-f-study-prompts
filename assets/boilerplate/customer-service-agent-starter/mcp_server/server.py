@@ -14,12 +14,21 @@ from mcp.server.fastmcp.exceptions import ToolError
 DATA = Path(__file__).resolve().parent.parent / "data"
 AGENT_REFUND_LIMIT = 500.00
 SIMULATED_TIMEOUTS = {"MM-1009"}  # carrier system "times out" for this order
+# lookup_order returns only these fields; warehouse, margin, and picker data stay internal.
+ORDER_FIELDS = ("order_id", "customer_id", "placed_at", "status", "items", "total", "currency",
+                "ship_method", "carrier", "tracking_number", "delivery_window", "delivered_at",
+                "perishable", "notes")
 
 mcp = FastMCP("malmberg")
 
 
 def _load(name: str) -> list[dict]:
     return json.loads((DATA / name).read_text(encoding="utf-8"))
+
+
+def _find_order(order_id: str) -> dict | None:
+    oid = order_id.strip().upper()
+    return next((o for o in _load("orders.json") if o["order_id"] == oid), None)
 
 
 def _error(category: str, message: str, retryable: bool, **details: object) -> ToolError:
@@ -33,16 +42,12 @@ def _error(category: str, message: str, retryable: bool, **details: object) -> T
 def get_customer(email: str = "", customer_id: str = "", name: str = "") -> dict:
     """Retrieves customer information."""
     customers = _load("customers.json")
-    if customer_id:
-        matches = [c for c in customers if c["customer_id"].lower() == customer_id.strip().lower()]
-    elif email:
-        matches = [c for c in customers if c["email"].lower() == email.strip().lower()]
-    elif name:
-        matches = [c for c in customers if c["name"].lower() == name.strip().lower()]
-    else:
-        raise _error("validation", "Provide one of: email, customer_id, or name.", retryable=False)
-    # No match is a valid empty result, not an error.
-    return {"count": len(matches), "matches": matches}
+    for field, raw in ("customer_id", customer_id), ("email", email), ("name", name):
+        if raw:
+            needle = raw.strip().lower()
+            matches = [c for c in customers if c[field].lower() == needle]
+            return {"count": len(matches), "matches": matches}
+    raise _error("validation", "Provide one of: email, customer_id, or name.", retryable=False)
 
 
 @mcp.tool()
@@ -53,8 +58,9 @@ def lookup_order(order_id: str) -> dict:
         # BUILD 2: generic on purpose. Replace with a structured error (see _error and process_refund)
         # so the agent knows this is a transient failure it can retry.
         raise ToolError("Operation failed")
-    order = next((o for o in _load("orders.json") if o["order_id"] == order_id), None)
-    return {"found": order is not None, "order": order}
+    order = _find_order(order_id)
+    trimmed = {k: order[k] for k in ORDER_FIELDS} if order else None
+    return {"found": order is not None, "order": trimmed}
 
 
 @mcp.tool()
@@ -65,7 +71,7 @@ def process_refund(order_id: str, customer_id: str, amount: float, reason: str) 
     the order belongs to them. Amount is in USD and cannot exceed the order total. Refunds over
     $500 are rejected: use escalate_to_human instead. Returns a refund confirmation ID.
     """
-    order = next((o for o in _load("orders.json") if o["order_id"] == order_id.strip().upper()), None)
+    order = _find_order(order_id)
     if order is None:
         raise _error("validation", f"No order {order_id}.", retryable=False)
     if order["customer_id"] != customer_id.strip().upper():

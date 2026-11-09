@@ -11,6 +11,7 @@ argument-hint: <Placeholder>
 ## When not to use this
 - <Placeholder>
 ## What you need to know
+- <Placeholder: which fields returned by the tool to use; the tool already trims internal fields>
 - <Placeholder>: <Placeholder>
 - <Placeholder>: <Placeholder>
 - <Placeholder>
