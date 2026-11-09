@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(./data/**)",
+      "Read(./.env)"
+    ],
+    "allow": [
+      "mcp__malmberg__get_customer",
+      "mcp__malmberg__lookup_order"
+    ],
+    "ask": [
+      "mcp__malmberg__process_refund",
+      "mcp__malmberg__escalate_to_human"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "malmberg"
+  ]
+}

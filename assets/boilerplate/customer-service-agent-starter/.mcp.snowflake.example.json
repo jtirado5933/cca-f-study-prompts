@@ -1,0 +1,15 @@
+{
+  "_comment": "Reference only, not used in the workshop. Shows how production would point the same agent at Snowflake. Credentials come from environment variables via ${VAR} expansion, never from this file. Check the Snowflake MCP server docs for its exact arguments.",
+  "mcpServers": {
+    "snowflake": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["snowflake-labs-mcp", "--service-config-file", "snowflake_tools.yaml"],
+      "env": {
+        "SNOWFLAKE_ACCOUNT": "${SNOWFLAKE_ACCOUNT}",
+        "SNOWFLAKE_USER": "${SNOWFLAKE_USER}",
+        "SNOWFLAKE_PAT": "${SNOWFLAKE_PAT}"
+      }
+    }
+  }
+}
