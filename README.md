@@ -1,4 +1,4 @@
-# CCA-F Study Prompts
+# CCAR-F Study Prompts
 
 Personal study notes and prompts for the Claude Certified Architect – Foundations (CCAR-F) exam, published with GitHub Pages.
 
@@ -17,6 +17,10 @@ Not affiliated with or endorsed by Anthropic or Trace3.
 - `.nojekyll`: serves the files as-is, without a Jekyll build.
 
 Content lives in `index.html`: intro, eight copy/paste prompts, and per-domain study notes with abbreviated instructor prompts (full task-by-task course text: see Resources link). Commit and push to `main`; Pages redeploys automatically.
+
+### Workshop access code
+
+Day 1 / Day 2 sections are gated in the browser (`assets/js/workshop-gate.js`). The access code is case-sensitive; its SHA-256 hex lives in `WORKSHOP_CODE_SHA256`. To rotate, hash a new string and update that constant (PowerShell: `[BitConverter]::ToString((New-Object Security.Cryptography.SHA256Managed).ComputeHash([Text.Encoding]::UTF8.GetBytes('YOUR-CODE'))).Replace('-','').ToLower()`). Unlock is remembered in `localStorage`. This is casual access control only—the starter `.zip` remains reachable by direct URL.
 
 The local working folder is `cc_cca_f_prompts_page`; the GitHub repo is `cca-f-study-prompts`.
 
